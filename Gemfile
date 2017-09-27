@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#gem 'license_matcher', '~> 0.2'
+
 # front-end assets
 source 'https://rails-assets.org' do
   gem 'rails-assets-fontawesome'

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label: "testmodel1"
+  language: MyString
+  description: MyText
+
+two:
+  label: "testmodel2"
+  language: MyString
+  description: MyText
