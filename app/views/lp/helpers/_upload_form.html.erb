@@ -1,0 +1,20 @@
+<% example ||= "example license text" %>
+
+<%= form_tag( lp_index_path, method: :post ) do %>
+  <div class="field">
+    <div class= "control">
+
+      <%= text_field_tag(:lic_text, example, class: "textarea") %>
+
+    </div>
+
+
+  </div>
+
+  <div class = "field">
+    <div class = "control" >
+      <%= submit_tag("Match", class: "button is-primary") %>
+    </div>
+  </div>
+
+<% end %>
