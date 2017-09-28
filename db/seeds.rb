@@ -17,3 +17,7 @@ models = Model.create([
 ])
 
 p "Added: #{models.size} new models"
+
+
+u = Client.create(name: "Demo User", active: true, token: "demo1234")
+p "Add demo user: #{u.name}"

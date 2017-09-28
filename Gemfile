@@ -33,7 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-#gem 'license_matcher', '~> 0.2'
+gem 'license_matcher', '0.2.0'
+gem 'msgpack', '~> 1.1'
 
 # front-end assets
 source 'https://rails-assets.org' do
