@@ -1,0 +1,37 @@
+<div class= "columns">
+	<div class="column is-one-third">
+		<div class="notification is-bold">
+	      <h1 class="title">
+	        LicenseMatcher
+	      </h1>
+	 
+	      <h2 class="subtitle">
+	        Identify FOSS license text with SPDX ID.
+	      </h2>
+
+	      <p class="subtitle"> Supported models: </p>
+	      <ul>
+	      	<li> UrlMatcher - <small> matches SPDX urls</small> </li>
+	      	<li> RuleMatcher - <small> matches various Regexs rules</small> </li>
+	      	<li> TFRubyMatcher - <small> Pure Ruby model using cosine similarity</small> </li>
+	      	<li> TFRustMatcher - <small> simple jaccard similarity </small>
+	      	<li> FingerprintMatcher - <small> matches based on hashes of selected Ngrams </small>
+	      </ul>
+	    </div>
+	</div>
+
+	<div class="column is-two-thirds">
+		<div class="">
+	      <h1 class="title">Identify</h1>
+	      <br />
+	      <h2 class="subtitle">
+	        Copy here a license text You want to identify
+	      </h2>
+
+	      <%= render "/experiments/helpers/upload_form" %>
+	    </div>
+
+	    Add here also token field
+	</div>
+
+</div>
