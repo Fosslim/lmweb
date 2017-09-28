@@ -10,23 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927154532) do
+ActiveRecord::Schema.define(version: 20170928102233) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
-    t.boolean "active"
+    t.boolean "active", default: false
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "clients_results", id: false, force: :cascade do |t|
-    t.integer "client_id", null: false
-    t.integer "result_id", null: false
+  create_table "experiments", force: :cascade do |t|
+    t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id", "result_id"], name: "index_clients_results_on_client_id_and_result_id"
-    t.index ["result_id", "client_id"], name: "index_clients_results_on_result_id_and_client_id"
+    t.integer "client_id"
+    t.index ["client_id"], name: "index_experiments_on_client_id"
   end
 
   create_table "models", force: :cascade do |t|
@@ -45,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170927154532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "model_id"
+    t.integer "experiment_id"
+    t.index ["experiment_id"], name: "index_results_on_experiment_id"
     t.index ["model_id"], name: "index_results_on_model_id"
   end
 

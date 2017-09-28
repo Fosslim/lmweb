@@ -1,6 +1,6 @@
 class Result < ApplicationRecord
-  has_one :model
-  belongs_to :client
+  belongs_to :model
+  belongs_to :experiment
 
   validates :label, presence: true
   validates :score, numericality: true

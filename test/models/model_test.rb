@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ModelTest < ActiveSupport::TestCase
+  setup do
+    Model.delete_all
+  end
+
   teardown do
     Model.delete_all
   end
@@ -13,5 +17,6 @@ class ModelTest < ActiveSupport::TestCase
     )
 
     assert mdl.save
+    assert_equal 1, Model.all.size
   end
 end
