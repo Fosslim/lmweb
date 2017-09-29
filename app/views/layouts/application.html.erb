@@ -13,6 +13,14 @@
 
   <body>
     <%= render "shared/nav_bar" %>
+    <% if notice %>
+      <div class="notification is-danger">
+        <button class="delete"></button>
+
+        <%= notice %>
+      </div>
+    <% end %>
+
 
     <section class="section">
       <%= yield %>
