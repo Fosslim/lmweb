@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170928102233) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: false
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170928102233) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "client_id"
+    t.bigint "client_id"
     t.index ["client_id"], name: "index_experiments_on_client_id"
   end
 
@@ -43,10 +46,13 @@ ActiveRecord::Schema.define(version: 20170928102233) do
     t.float "exec_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "model_id"
-    t.integer "experiment_id"
+    t.bigint "model_id"
+    t.bigint "experiment_id"
     t.index ["experiment_id"], name: "index_results_on_experiment_id"
     t.index ["model_id"], name: "index_results_on_model_id"
   end
 
+  add_foreign_key "experiments", "clients"
+  add_foreign_key "results", "experiments"
+  add_foreign_key "results", "models"
 end

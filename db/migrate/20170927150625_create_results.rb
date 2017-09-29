@@ -9,6 +9,6 @@ class CreateResults < ActiveRecord::Migration[5.1]
     end
 
     add_reference :results, :model, foreign_key: true
-    add_reference :results, :experiment, foreign_key: true
+
   end
 end
