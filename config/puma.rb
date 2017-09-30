@@ -15,6 +15,7 @@ port        ENV.fetch("PORT") { 3000 }
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
+
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
@@ -54,3 +55,20 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+if ENV.fetch("RAILS_ENV", '') == 'production'
+  daemonize true
+  # Store the pid of the server in the file at “path”.
+  pidfile '/var/www/lmweb/tmp/pids/puma.pid'
+
+  # # Use “path” as the file to store the server info state. This is
+  # # used by “pumactl” to query and control the server.
+
+  state_path '/var/www/lmweb/tmp/pids/puma.state'
+
+  bind 'unix:///var/www/lmweb/tmp/puma.sock'
+else
+  daemonize false
+
+  bind 'tcp://127.0.0.1:3000'
+end

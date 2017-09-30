@@ -15,18 +15,19 @@ class LMService
     @@models = {}
     @@matchers = {}
 
+    p "LMService loading..."
     Model.all.to_a.each do |mdl|
       mdl_id = mdl[:label].to_s
       @@models[mdl_id]    = mdl
       @@matchers[mdl_id]  =  build_matcher(mdl_id)
     end
+    p "Done"
   end
 
   def run_experiment(client, text)
     results = []
 
-    #TODO: refactor preprocess into own class method
-    clean_text = @@matchers['TFRubyMatcher'].preprocess_text(text)
+    clean_text = LicenseMatcher::Preprocess.preprocess_text(text)
 
     @@matchers.each_pair do |mdl_id, lm|
       res = match_license( mdl_id, clean_text )
@@ -39,20 +40,14 @@ class LMService
   def match_license(model_id, text)
     res = Result.new(model: @@models[model_id], label: "", score: 0.0, exec_time: 0.0)
 
-
     lm = @@matchers[model_id]
     bm = Benchmark.measure do
-     #TODO: refactor after gem is updated
-      case model_id
-      when /urlmatcher/i
-        res.label = lm.match_url(text).to_s
-      when /rulematcher/i
-        res.label = lm.match_rules(text).to_s
-      else
-        m = lm.match_text( text, 0.0)
-        res.label = m.get_label()
-        res.score = m.get_score()
+      m = lm.match_text( text, 0.0)
+      if m
+        res.label = m.get_label().to_s
+        res.score = m.get_score().to_f
       end
+
     end
 
     res.exec_time = bm.real.to_f
@@ -60,6 +55,7 @@ class LMService
   rescue => e
     p "LMService.match_license: failed to get results from `#{model_id}`"
     p "\treason: #{e.message}"
+    p "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
     nil
   end
 

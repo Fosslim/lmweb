@@ -12,7 +12,7 @@ class ExperimentsController < ApplicationController
     exp = LMService.instance.run_experiment(client, params[:lic_text].to_s)
     unless exp.save
       redirect_to new_experiment_path, notice: "Failed to save experiment: #{exp.errors.full_messages.to_sentence}"
-
+      logger.error "Failed to save experiment:\n { exp.errors }"
     else
       redirect_to action: "show", id: exp.id, notice: "Success!"
     end
